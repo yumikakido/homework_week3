@@ -126,7 +126,7 @@ function writePassword(){
 
   // At least one character type should be selected, if not return alert
   if (!htmlLowerCase && !htmlUpperCase && !htmlNumeric && !htmlSpecialCharacters) {
-    alert("You must pick one option!");
+    alert("You must pick one option");
   }
   
   else {
