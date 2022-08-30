@@ -1,7 +1,7 @@
-//Assignment Code
+// Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-//choose string randomly
+// Choose string randomly
 function randomString(stringLength, characterSet)  {
   const charSet = characterSet
   let randomString = '';
@@ -12,30 +12,30 @@ function randomString(stringLength, characterSet)  {
   return randomString;
 };
 
-// series of prompts for password criteria
-// password criteria
+// Series of prompts for password criteria
+// Password criteria
 function generatePassword(lengthOfPassword, lowercase, uppercase, numeric, specialCharacters){
   
-  //lengthOfPassword (at least 8 characters and no more than 128 characters)
+  // LengthOfPassword (at least 8 characters and no more than 128 characters)
 if (lengthOfPassword >= 8 && lengthOfPassword <=128 ) {
   var characterSet = ''
 
-    //character types (lowercase)
+    // Character types (lowercase)
     if (lowercase){
       characterSet = characterSet + "abcdefghijklmnopqrstuvwxyz"
     }
 
-    //character types (uppercase)
+    // Character types (uppercase)
     if (uppercase){
       characterSet = characterSet + "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     }
 
-    //character types (numeric)
+    // Character types (numeric)
     if(numeric) {
       characterSet = characterSet + "123456789"
     }
 
-    //character types (specialCharacters)
+    // Character types (specialCharacters)
     if(specialCharacters) {
       characterSet = characterSet + " !\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"
     }
@@ -43,8 +43,78 @@ if (lengthOfPassword >= 8 && lengthOfPassword <=128 ) {
   }
   
 }
- 
-//Write password to the #password input
+
+// Validate input and check if the selected character type(s) is included 
+function validateInput(originalPassword, passwordOptions) {
+
+  // Split a string into an array of substrings
+  var generatedPasswordAsArray = originalPassword.split("")
+
+  var hasLowercase = false
+  var hasUppercase = false
+  var hasNumeric = false
+  var hasSpecialCharacters = false
+
+  generatedPasswordAsArray.array.forEach(passwordCharacter => {
+    if(passwordOptions.lowercase){
+      if(characterSet.includes(passwordCharacter)) {
+        hasLowercase = true;
+      }
+    }
+
+      if(passwordOptions.uppercase){
+        if(characterSet.includes(passwordCharacter)) {
+          hasUppercase = true;
+        }
+      }
+
+      if(passwordOptions.numeric) {
+        if(characterSet.includes(passwordCharacter)) {
+          hasNumeric = true;
+        }
+      }
+      
+      if(passwordOptions.specialCharacters){
+        if(characterSet.includes(passwordCharacter)) {
+          hasSpecialCharacters = true;
+      }
+    } 
+  });
+}
+
+// Update input if one of the character types is ticked but not included
+function updateInput() {
+if(passwordOptions.lowercase) {
+  if(!hasLowercase) {
+    generatedPasswordAsArray[0] = randomString(1, "abcdefghijklmnopqrstuvwxyz")
+  }
+}
+
+  if(passwordOptions.uppercase) {
+    if(!hasUppercase) {
+      generatedPasswordAsArray[1] = randomString(1, "ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+    }
+  }
+
+  if(passwordOptions.numeric) {
+    if(!hasNumeric) {
+      generatedPasswordAsArray[2] = randomString(1, "123456789")
+    }
+  }
+
+  if(passwordOptions.specialCharacters) {
+    if(!hasSpecialCharacters) {
+      generatedPasswordAsArray[3] = randomString(1, "!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~")
+    }
+  }
+
+  // Return an array as a string 
+  return generatedPasswordAsArray.join("")
+}
+
+
+
+// Write password to the #password input
 function writePassword(){
 
   var htmlLengthOfPassword = document.querySelector("#lengthOfPassword").value;
@@ -54,7 +124,7 @@ function writePassword(){
   var htmlNumeric = document.querySelector("#numeric").checked;
   var htmlSpecialCharacters = document.querySelector("#specialCharacters").checked;
 
-  // at least one character type should be selected
+  // At least one character type should be selected, if not return alert
   if (!htmlLowerCase && !htmlUpperCase && !htmlNumeric && !htmlSpecialCharacters) {
     alert("You must pick one option!");
   }
@@ -71,55 +141,10 @@ function writePassword(){
   var passwordText = document.querySelector("#password");
   passwordText.value = password;
   
-  //Double check 
+  // Output password to the console to double check 
   console.log(password)
 
   } 
-}
-
-// Validate input
-function validateInput(originalPassword, passwordOptions) {
-
-  //split a string into an array of substrings
-  var generatedPasswordAsArray = originalPassword.split("")
-
-  var hasLowercase = false
-  var hasUppercase = false
-  var hasNumeric = false
-  var hasSpecialCharacters = false
-
-  generatedPasswordAsArray.array.forEach(passwordCharacter => {
-    if(passwordOptions.lowercase){
-      if(hasLowercase.includes(passwordCharacter)) {
-        hasLowercase = true;
-      }
-    }
-
-      if(passwordOptions.uppercase){
-        if(hasUppercase.includes(passwordCharacter)) {
-          hasUppercase = true;
-        }
-      }
-
-      if(passwordOptions.numeric) {
-        if(hasNumeric.includes(passwordCharacter)) {
-          hasNumeric = true;
-        }
-      }
-      
-      if(passwordOptions.specialCharacters){
-        if(hasSpecialCharacters.includes(passwordCharacter)) {
-          hasSpecialCharacters = true;
-      }
-    } 
-  });
-}
-
-//Update input if one of the criteria is ticked but not included
-if(passwordOptions.lowercase) {
-  if(!hasLowercase) {
-    generatedPasswordAsArray[0] = randomString(1, "abcdefghijklmnopqrstuvwxyz")
-  }
 }
 
 
