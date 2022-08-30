@@ -80,6 +80,13 @@ function validateInput(originalPassword, passwordOptions) {
       }
     } 
   });
+
+  return {
+    hasLower: hasLowercase,
+    hasUppercase: hasUppercase,
+    hasNumeric: hasNumeric,
+    hasSpecialCharacters: hasSpecialCharacters
+  }
 }
 
 // Update input if one of the character types is ticked but not included
