@@ -16,6 +16,22 @@
         <div class="card-header">
           <h2>Generate a Password</h2>
         </div>
+        <div>
+          <label for lengthOfPassword>Password Length (between 8 and 128): </label>
+          <input type="number" id="lengthOfPassword" name="lengthOfPassword" min="8" max="128">
+        </div>
+        <div>
+          <input type="checkbox" id="lowerCase" name="lowerCase"><label for="lowerCase"> Lowercase </label><br>
+        </div>
+        <div>
+          <input type="checkbox" id="upperCase" name="upperCase"><label for="upperCase"> Uppercase </label><br>
+        </div>
+        <div>
+          <input type="checkbox" id="numeric" name="numeric"><label for="numeric"> Numeric </label><br>
+        </div>
+        <div>
+          <input type="checkbox" id="specialCharacters" name="specialCharacters"><label for="specialCharacters"> Special Characters </label><br>
+        </div>
         <div class="card-body">
           <textarea
             readonly
