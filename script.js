@@ -39,87 +39,63 @@ if (lengthOfPassword >= 8 && lengthOfPassword <=128 ) {
     if(specialCharacters) {
       characterSet = characterSet + " !\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"
     }
-      return randomString(lengthOfPassword, characterSet)
+
+    var initialStringAsArray = Array.from(randomString(lengthOfPassword, characterSet))
+    //give random number/character (e.g. Array.from("ABCDefgh")) instead of randomString to check if validation function works
+
+    var hasLowercase = false
+    var hasUppercase = false
+    var hasNumeric = false
+    var hasSpecialCharacters = false
+
+    if (lowercase) {
+      initialStringAsArray.forEach(eachCharacter => {
+        if("abcdefghijklmnopqrstuvwxyz".includes(eachCharacter)) {
+          hasLowercase = true
+        }
+      })
+      if (!hasLowercase) {
+        initialStringAsArray[0] = randomString(1, "abcdefghijklmnopqrstuvwxyz")
+      }
+    }
+
+    if (uppercase) {
+      initialStringAsArray.forEach(eachCharacter => {
+        if("ABCDEFGHIJKLMNOPQRSTUVWXYZ".includes(eachCharacter)) {
+          hasUppercase = true
+        }
+      })
+      if (!hasUppercase) {
+        initialStringAsArray[1] = randomString(1, "ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+      }
+    }
+
+    if (numeric) {
+      initialStringAsArray.forEach(eachCharacter => {
+        if("123456789".includes(eachCharacter)) {
+          hasNumeric = true
+        }
+      })
+      if (!hasNumeric) {
+        initialStringAsArray[2] = randomString(1, "123456789")
+      }
+    }
+    
+    if (specialCharacters) {
+      initialStringAsArray.forEach(eachCharacter => {
+        if("!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~".includes(eachCharacter)) {
+          hasSpecialCharacters = true
+        }
+      })
+      if (!hasSpecialCharacters) {
+        initialStringAsArray[3] = randomString(1, "!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~")
+      }
+    }
+
+    return initialStringAsArray.join('')
   }
   
 }
-
-// Validate input and check if the selected character type(s) is included 
-function validateInput(originalPassword, passwordOptions) {
-
-  // Split a string into an array of substrings
-  var generatedPasswordAsArray = originalPassword.split("")
-
-  var hasLowercase = false
-  var hasUppercase = false
-  var hasNumeric = false
-  var hasSpecialCharacters = false
-
-  generatedPasswordAsArray.array.forEach(passwordCharacter => {
-    if(passwordOptions.lowercase){
-      if(characterSet.includes(passwordCharacter)) {
-        hasLowercase = true;
-      }
-    }
-
-      if(passwordOptions.uppercase){
-        if(characterSet.includes(passwordCharacter)) {
-          hasUppercase = true;
-        }
-      }
-
-      if(passwordOptions.numeric) {
-        if(characterSet.includes(passwordCharacter)) {
-          hasNumeric = true;
-        }
-      }
-      
-      if(passwordOptions.specialCharacters){
-        if(characterSet.includes(passwordCharacter)) {
-          hasSpecialCharacters = true;
-      }
-    } 
-  });
-
-  return {
-    hasLower: hasLowercase,
-    hasUppercase: hasUppercase,
-    hasNumeric: hasNumeric,
-    hasSpecialCharacters: hasSpecialCharacters
-  }
-}
-
-// Update input if one of the character types is ticked but not included
-function updateInput() {
-if(passwordOptions.lowercase) {
-  if(!hasLowercase) {
-    generatedPasswordAsArray[0] = randomString(1, "abcdefghijklmnopqrstuvwxyz")
-  }
-}
-
-  if(passwordOptions.uppercase) {
-    if(!hasUppercase) {
-      generatedPasswordAsArray[1] = randomString(1, "ABCDEFGHIJKLMNOPQRSTUVWXYZ")
-    }
-  }
-
-  if(passwordOptions.numeric) {
-    if(!hasNumeric) {
-      generatedPasswordAsArray[2] = randomString(1, "123456789")
-    }
-  }
-
-  if(passwordOptions.specialCharacters) {
-    if(!hasSpecialCharacters) {
-      generatedPasswordAsArray[3] = randomString(1, "!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~")
-    }
-  }
-
-  // Return an array as a string 
-  return generatedPasswordAsArray.join("")
-}
-
-
 
 // Write password to the #password input
 function writePassword(){
