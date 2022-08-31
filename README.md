@@ -6,7 +6,7 @@ This project is to build a password generator application. The application gener
 N/A
 ### Usage
 To use this application, go to [GitHub Pages](https://yumikakido.github.io/homework_week3/)  and select the length of your password between 8 and 128 characters. Then, choose character types (`Lowercase`, `Uppercase`, `Numeric` and/or `Special Characters`) by ticking the boxes as per below screenshot.  After that, click the `Generate Password` button and your password will be appeared on the page.
-**NOTE:** At least one character option must be selected otherwise it will give you an alert. 
+<br>**NOTE:** At least one character option must be selected otherwise it will give you an alert. 
 ![passwordGen](/assets/img/passwordGen.png)
 
 ### Credits
