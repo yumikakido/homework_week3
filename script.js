@@ -40,58 +40,68 @@ if (lengthOfPassword >= 8 && lengthOfPassword <=128 ) {
       characterSet = characterSet + " !\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"
     }
 
+    // Validate input to check if selected character type(s) is included
+    //  Create array from string to go through randomString one by one
     var initialStringAsArray = Array.from(randomString(lengthOfPassword, characterSet))
-    //give random number/character (e.g. Array.from("ABCDefgh")) instead of randomString to check if validation function works
+    // Pass random number/character (e.g. Array.from("ABCDefgh")) instead of randomString to check if validation function works
 
     var hasLowercase = false
     var hasUppercase = false
     var hasNumeric = false
     var hasSpecialCharacters = false
 
+    // If lowercase is selected and included, return true and no update is required 
     if (lowercase) {
       initialStringAsArray.forEach(eachCharacter => {
         if("abcdefghijklmnopqrstuvwxyz".includes(eachCharacter)) {
           hasLowercase = true
         }
       })
+      // If lowercase is selected but not included, update array[0]
       if (!hasLowercase) {
         initialStringAsArray[0] = randomString(1, "abcdefghijklmnopqrstuvwxyz")
       }
     }
 
+    // If uppercase is selected and included, return true and no update is required 
     if (uppercase) {
       initialStringAsArray.forEach(eachCharacter => {
         if("ABCDEFGHIJKLMNOPQRSTUVWXYZ".includes(eachCharacter)) {
           hasUppercase = true
         }
       })
+      // If uppercase is selected but not included, update array[1]
       if (!hasUppercase) {
         initialStringAsArray[1] = randomString(1, "ABCDEFGHIJKLMNOPQRSTUVWXYZ")
       }
     }
 
+    // If numeric is selected and included, return true and no update is required 
     if (numeric) {
       initialStringAsArray.forEach(eachCharacter => {
         if("123456789".includes(eachCharacter)) {
           hasNumeric = true
         }
       })
+      // If numeric is selected but not included, update array[2]
       if (!hasNumeric) {
         initialStringAsArray[2] = randomString(1, "123456789")
       }
     }
-    
+
+    // If specialCharacters is selected and included, return true and no update is required 
     if (specialCharacters) {
       initialStringAsArray.forEach(eachCharacter => {
         if("!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~".includes(eachCharacter)) {
           hasSpecialCharacters = true
         }
       })
+      // If specialCharacter is selected but not included, update array[3]
       if (!hasSpecialCharacters) {
         initialStringAsArray[3] = randomString(1, "!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~")
       }
     }
-
+    // Return an array as a string
     return initialStringAsArray.join('')
   }
   
